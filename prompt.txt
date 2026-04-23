@@ -1,0 +1,3 @@
+I want to create a Jupyter notebook that compares inflation in all G7 countries, getting data from FRED and the World Bank.
+
+Show me line plots comparing annual inflation rates in these countries since 1980.
