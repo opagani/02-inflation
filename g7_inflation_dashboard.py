@@ -4,6 +4,12 @@ __generated_with = "0.23.2"
 app = marimo.App()
 
 
+@app.cell
+def _():
+    import marimo as mo
+    return (mo,)
+
+
 @app.cell(hide_code=True)
 def _(mo):
     mo.md(r"""# 🌍 G7 Inflation Dashboard
@@ -120,7 +126,7 @@ def _(mo):
 
 
 @app.cell
-def _(avg_df, chart_type, countries, filtered, go, mo, px, show_avg, year_range):
+def _(avg_df, chart_type, filtered, go, mo, px, show_avg, year_range):
     if chart_type.value == "Combined":
         fig = px.line(
             filtered,
@@ -177,7 +183,7 @@ def _(avg_df, chart_type, countries, filtered, go, mo, px, show_avg, year_range)
         fig.update_layout(height=500)
 
     mo.plain(fig)
-    return (fig,)
+    return
 
 
 @app.cell(hide_code=True)
@@ -209,7 +215,7 @@ def _(avg_df, filtered, mo, pd, show_avg):
         summary = pd.concat([summary, pd.DataFrame([overall_avg])], ignore_index=True)
 
     mo.ui.table(summary, selection=None, pagination=False, label="Stats")
-    return (summary,)
+    return
 
 
 @app.cell(hide_code=True)
@@ -223,7 +229,7 @@ def _(datetime, filtered, mo):
     csv_data = filtered.to_csv(index=False)
     mo.download(csv_data.encode('utf-8'), filename="g7_inflation_data.csv", mimetype="text/csv")
     mo.md(f"Data: World Bank API (FP.CPI.TOTL.ZG) | {len(filtered)} rows | Updated: {datetime.now().strftime('%Y-%m-%d %H:%M')}")
-    return (csv_data,)
+    return
 
 
 if __name__ == "__main__":
